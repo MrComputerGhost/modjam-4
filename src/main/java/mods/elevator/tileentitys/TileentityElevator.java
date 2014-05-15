@@ -1,9 +1,13 @@
 package mods.elevator.tileentitys;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import mods.elevator.init.Blocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
@@ -11,10 +15,25 @@ import cpw.mods.fml.common.FMLCommonHandler;
 
 public class TileEntityElevator extends TileEntity
 {
-
+	
+	public List<String> list = new ArrayList<String>();
+	
 	public void readFromNBT(NBTTagCompound nbttag)
 	{
+		if(nbttag.hasKey("Names"))
+		{
+			String tag = nbttag.getString("Names");
+			for(String name : tag.split(";"))
+			{
+				list.add(name);
+			}
+		}
 		super.readFromNBT(nbttag);
+	}
+	
+	public void writeToNBT(NBTTagCompound nbttag)
+	{
+		super.writeToNBT(nbttag);
 	}
 
 	public EntityPlayer getPlayer()
@@ -126,6 +145,7 @@ public class TileEntityElevator extends TileEntity
 						if(elevator.canTeleport(player))
 						{
 							player.setPositionAndUpdate(xCoord, yCoord+1, z > 0 ? zCoord+zz : zCoord-zz);
+							player.swingProgressInt = 0;
 							break;
 						}
 					}
@@ -171,11 +191,6 @@ public class TileEntityElevator extends TileEntity
 				teleportonTop(player);
 			}
 		}
-	}
-
-	public void writeToNBT(NBTTagCompound nbttag)
-	{
-		super.writeToNBT(nbttag);
 	}
 
 }
