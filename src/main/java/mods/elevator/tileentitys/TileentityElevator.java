@@ -189,7 +189,6 @@ public class TileEntityElevator extends TileEntity
 				}
 			}
 		}
-		if(locked) player.addChatMessage(new ChatComponentText("\247cThe next elevator is Locked"));
 	}
 	
 	public void teleportonTop(EntityPlayer player)
@@ -225,7 +224,6 @@ public class TileEntityElevator extends TileEntity
 				}
 			}
 		}
-		if(locked) player.addChatMessage(new ChatComponentText("\247cThe next elevator is Locked"));
 	}
 
 	public void updateEntity()

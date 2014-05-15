@@ -1,6 +1,7 @@
 package mods.elevator.init;
 
 import mods.elevator.items.ItemPart;
+import mods.elevator.items.ItemProtecter;
 import net.minecraft.item.Item;
 import cpw.mods.fml.common.registry.GameRegistry;
 

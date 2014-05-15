@@ -1,6 +1,11 @@
-package mods.elevator.init;
+package mods.elevator.items;
+
+import java.util.List;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import mods.elevator.init.Blocks;
 import mods.elevator.tileentitys.TileEntityElevator;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -59,6 +64,23 @@ public class ItemProtecter extends Item
 			}
 		}
 		return true;
+	}
+	
+	public boolean isinhand(EntityPlayer player)
+	{
+		return player.getHeldItem() != null && player.getHeldItem().getItem().getUnlocalizedName().equalsIgnoreCase(getUnlocalizedName());
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4)
+	{
+		
+		list.add((isinhand(player) ? "\247c" : "") + "!! You cannot use the elevator");
+		list.add((isinhand(player) ? "\247c" : "") + "while the item is in you hand !!");
+		list.add("Sneak and Rightclick - Add or remove");
+		list.add("Sneak and Rightclick in air - Clear list");
+		list.add("Rightclick - look at then list");
+		super.addInformation(stack, player, list, par4);
 	}
 
 
