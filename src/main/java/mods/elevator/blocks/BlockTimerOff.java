@@ -22,6 +22,7 @@ public class BlockTimerOff extends BlockTimer
 	public BlockTimerOff(Material material)
 	{
 		super(material);
+		setBlockName("block.timeroff");
 	}
 	
 	public int isProvidingWeakPower(IBlockAccess iBlockAccess, int x, int y, int z, int side)
