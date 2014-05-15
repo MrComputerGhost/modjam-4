@@ -17,8 +17,6 @@ import net.minecraft.world.World;
 public class BlockTimer extends BlockContainer
 {
 	
-	public boolean redstone = false;
-
 	public BlockTimer(Material material)
 	{
 		super(material);
@@ -41,7 +39,7 @@ public class BlockTimer extends BlockContainer
 
 	public int isProvidingWeakPower(IBlockAccess iBlockAccess, int x, int y, int z, int side)
 	{
-		return redstone;
+		return 15;
 	}
 
 	public void updateTick(World world, int x, int y, int z, Random random)
