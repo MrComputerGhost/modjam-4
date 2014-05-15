@@ -1,5 +1,7 @@
 package mods.elevator.tileentitys;
 
+import mods.elevator.init.Blocks;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -7,7 +9,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 
-public class TileentityElevator extends TileEntity
+public class TileEntityElevator extends TileEntity
 {
 
 	public void readFromNBT(NBTTagCompound nbttag)
@@ -37,6 +39,11 @@ public class TileentityElevator extends TileEntity
 		}
 
 		return null;
+	}
+	
+	public boolean canTeleport(EntityPlayer player)
+	{
+		return true;
 	}
 
 	public double getDirectionDouble(EntityPlayer player)
@@ -84,7 +91,44 @@ public class TileentityElevator extends TileEntity
 	
 	public void teleportonSide(EntityPlayer player)
 	{
-		System.out.println(Math.abs(getDirectionDouble(player)));
+		int x = getDirectiononBlocksX(player);
+		int z = getDirectiononBlocksZ(player);
+		for(int xx = 0; xx < Math.abs(x)*8; xx++)
+		{
+			if(xx != 0)
+			{
+				Block b = worldObj.getBlock(x > 0 ? xCoord+xx : xCoord-xx, yCoord, zCoord);
+				if(b != null && b.getUnlocalizedName().equalsIgnoreCase(Blocks.elevator.getUnlocalizedName()))
+				{
+					TileEntityElevator elevator = (TileEntityElevator)worldObj.getTileEntity(x > 0 ? xCoord+xx : xCoord-xx, yCoord, zCoord);
+					if(elevator != null)
+					{
+						if(elevator.canTeleport(player))
+						{
+							player.setPositionAndUpdate(x > 0 ? xCoord+xx : xCoord-xx, yCoord+1, zCoord);
+						}
+					}
+				}
+			}
+		}
+		for(int zz = 0; zz < Math.abs(z)*8; zz++)
+		{
+			if(zz != 0)
+			{
+				Block b = worldObj.getBlock(xCoord, yCoord, z > 0 ? zCoord+zz : zCoord-zz);
+				if(b != null && b.getUnlocalizedName().equalsIgnoreCase(Blocks.elevator.getUnlocalizedName()))
+				{
+					TileEntityElevator elevator = (TileEntityElevator)worldObj.getTileEntity(x > 0 ? xCoord+xx : xCoord-xx, yCoord, zCoord);
+					if(elevator != null)
+					{
+						if(elevator.canTeleport(player))
+						{
+							player.setPositionAndUpdate(x > 0 ? xCoord+xx : xCoord-xx, yCoord+1, zCoord);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public void updateEntity()

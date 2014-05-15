@@ -1,6 +1,6 @@
 package mods.elevator.blocks;
 
-import mods.elevator.tileentitys.TileentityElevator;
+import mods.elevator.tileentitys.TileEntityElevator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -17,7 +17,7 @@ public class BlockElevator extends BlockContainer
 
 	public TileEntity createNewTileEntity(World world, int arg1)
 	{
-		return new TileentityElevator();
+		return new TileEntityElevator();
 	}
 
 }
