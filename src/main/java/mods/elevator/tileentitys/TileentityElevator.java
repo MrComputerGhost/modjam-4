@@ -25,7 +25,10 @@ public class TileEntityElevator extends TileEntity
 			String tag = nbttag.getString("Names");
 			for(String name : tag.split(";"))
 			{
-				list.add(name);
+				if(!name.isEmpty())
+				{
+					list.add(name);
+				}
 			}
 		}
 		super.readFromNBT(nbttag);
@@ -33,6 +36,11 @@ public class TileEntityElevator extends TileEntity
 	
 	public void writeToNBT(NBTTagCompound nbttag)
 	{
+		String tag = "";
+		for(String s : list)
+		{
+			tag += s+";";
+		}
 		super.writeToNBT(nbttag);
 	}
 
@@ -62,7 +70,7 @@ public class TileEntityElevator extends TileEntity
 	
 	public boolean canTeleport(EntityPlayer player)
 	{
-		return true;
+		return list.isEmpty() || list.contains(player.getDisplayName());
 	}
 
 	public double getDirectionDouble(EntityPlayer player)
