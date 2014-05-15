@@ -3,6 +3,7 @@ package mods.elevator.tileentitys;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public class TileentityElevator extends TileEntity
@@ -22,9 +23,15 @@ public class TileentityElevator extends TileEntity
 				if(object instanceof EntityPlayer)
 				{
 					EntityPlayer player = (EntityPlayer)object;
-					if(player.getDistanceToEntity(player) > 2)
+					if(player.posX > xCoord-0.35 && player.posX < xCoord+1.35)
 					{
-						System.out.println("true");
+						if(player.posY > yCoord && player.posY < yCoord+1.35)
+						{
+							if(player.posZ > zCoord-0.35 && player.posZ < zCoord+1.35)
+							{
+								return player;
+							}
+						}
 					}
 				}
 
@@ -32,10 +39,21 @@ public class TileentityElevator extends TileEntity
 		}
 		return null;
 	}
-
+	
+	public double getDirectionDouble(EntityPlayer player)
+	{
+		return MathHelper.floor_double((double)(player.rotationYaw * 4.0D / 360.0D) + 0.5D) & 3;
+	}
+	
 	public String getDirection(EntityPlayer player)
 	{
-		return null;
+		if(player != null)
+		{
+			
+		}else
+		{
+			return "";
+		}
 	}
 
 	public void updateEntity()
