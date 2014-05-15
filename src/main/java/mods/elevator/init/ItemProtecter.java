@@ -32,6 +32,10 @@ public class ItemProtecter extends Item
 						elevator.list.add(player.getDisplayName());
 						player.addChatMessage(new ChatComponentText("\247cThis Elevator is now Locked"));
 						player.addChatMessage(new ChatComponentText("You are now on the whitelist"));
+					}else if(player.isSneaking() && !player.onGround)
+					{
+						elevator.list.clear();
+						player.addChatMessage(new ChatComponentText("You cleared the whitelist"));
 					}else if(!player.isSneaking() && !elevator.list.isEmpty())
 					{
 						player.addChatMessage(new ChatComponentText("Users: "));

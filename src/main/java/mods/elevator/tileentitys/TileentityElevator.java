@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mods.elevator.init.Blocks;
+import mods.elevator.init.Items;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -72,7 +73,12 @@ public class TileEntityElevator extends TileEntity
 	
 	public boolean canTeleport(EntityPlayer player)
 	{
-		return list.isEmpty() || list.contains(player.getDisplayName());
+		boolean item = false;
+		if(player.getHeldItem() != null && player.getHeldItem().getItem().getUnlocalizedName().equalsIgnoreCase(Items.protecter.getUnlocalizedName()))
+		{
+			item = true;
+		}
+		return (list.isEmpty() || list.contains(player.getDisplayName()) && player.getHeldItem() != null) && !item;
 	}
 
 	public double getDirectionDouble(EntityPlayer player)
@@ -137,7 +143,7 @@ public class TileEntityElevator extends TileEntity
 						{
 							worldObj.playSoundEffect(xCoord, yCoord+1, zCoord, "elevator:elevator", 100, 100);
 							worldObj.playSoundEffect(elevator.xCoord, elevator.yCoord+1, elevator.zCoord, "elevator:elevator", 100, 100);
-							player.setPositionAndUpdate(x > 0 ? xCoord+xx : xCoord-xx, yCoord+1, zCoord);
+							player.setPositionAndUpdate(x > 0 ? xCoord+xx+0.5 : xCoord-xx+0.5, yCoord+1, zCoord+0.5);
 							player.swingProgressInt = 0;
 							if(locked)
 							{
@@ -167,7 +173,7 @@ public class TileEntityElevator extends TileEntity
 						{
 							worldObj.playSoundEffect(xCoord, yCoord+1, zCoord, "elevator:elevator", 100, 100);
 							worldObj.playSoundEffect(elevator.xCoord, elevator.yCoord+1, elevator.zCoord, "elevator:elevator", 100, 100);
-							player.setPositionAndUpdate(xCoord, yCoord+1, z > 0 ? zCoord+zz : zCoord-zz);
+							player.setPositionAndUpdate(xCoord+0.5, yCoord+1, z > 0 ? zCoord+zz+0.5 : zCoord-zz+0.5);
 							player.swingProgressInt = 0;
 							if(locked)
 							{
@@ -203,7 +209,7 @@ public class TileEntityElevator extends TileEntity
 						{
 							worldObj.playSoundEffect(xCoord, yCoord+1, zCoord, "elevator:elevator", 100, 100);
 							worldObj.playSoundEffect(elevator.xCoord, elevator.yCoord+1, elevator.zCoord, "elevator:elevator", 100, 100);
-							player.setPositionAndUpdate(xCoord, !player.isSneaking() ? yCoord+yy+1 : yCoord-yy+1, zCoord);
+							player.setPositionAndUpdate(xCoord+0.5, !player.isSneaking() ? yCoord+yy+1 : yCoord-yy+1, zCoord+0.5);
 							player.motionY = 0;
 							if(locked)
 							{
