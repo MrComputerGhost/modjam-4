@@ -2,6 +2,7 @@ package mods.elevator;
 
 import mods.elevator.init.Blocks;
 import mods.elevator.init.Items;
+import mods.elevator.init.Recipes;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -19,6 +20,7 @@ public class ElevatorMod
 	{
 		Blocks.init();
 		Items.init();
+		Recipes.init();
 	}
 	
 	@EventHandler
