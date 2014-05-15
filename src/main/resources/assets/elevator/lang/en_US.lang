@@ -1,1 +1,4 @@
 tile.block.elevator.name=6D Elevator
+item.item.ironChip.name=Iron Chip
+item.item.goldChip.name=Gold Chip
+item.item.enderChip.name=Ender Chip
