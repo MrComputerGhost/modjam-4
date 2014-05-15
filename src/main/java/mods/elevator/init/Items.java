@@ -17,6 +17,7 @@ public class Items
 		GameRegistry.registerItem(ironChip, "item.ironChip");
 		GameRegistry.registerItem(goldChip, "item.goldChip");
 		GameRegistry.registerItem(enderChip, "item.enderChip");
+		GameRegistry.registerItem(protecter, "item.protecter");
 	}
 	
 }

@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.Direction;
 import net.minecraft.util.MathHelper;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -41,6 +42,7 @@ public class TileEntityElevator extends TileEntity
 		{
 			tag += s+";";
 		}
+		nbttag.setString("Names", tag);
 		super.writeToNBT(nbttag);
 	}
 
@@ -120,6 +122,7 @@ public class TileEntityElevator extends TileEntity
 	{
 		int x = getDirectiononBlocksX(player);
 		int z = getDirectiononBlocksZ(player);
+		boolean locked = false;
 		for(int xx = 0; xx < Math.abs(x)*16; xx++)
 		{
 			if(xx != 0)
@@ -134,7 +137,15 @@ public class TileEntityElevator extends TileEntity
 						{
 							player.setPositionAndUpdate(x > 0 ? xCoord+xx : xCoord-xx, yCoord+1, zCoord);
 							player.swingProgressInt = 0;
+							if(locked)
+							{
+								locked = false;
+								player.addChatMessage(new ChatComponentText("\247cYou have pass a locked elevator"));
+							}
 							break;
+						}else
+						{
+							locked = true;
 						}
 					}
 				}
@@ -154,16 +165,26 @@ public class TileEntityElevator extends TileEntity
 						{
 							player.setPositionAndUpdate(xCoord, yCoord+1, z > 0 ? zCoord+zz : zCoord-zz);
 							player.swingProgressInt = 0;
+							if(locked)
+							{
+								locked = false;
+								player.addChatMessage(new ChatComponentText("\247cYou have pass a locked elevator"));
+							}
 							break;
+						}else
+						{
+							locked = true;
 						}
 					}
 				}
 			}
 		}
+		if(locked) player.addChatMessage(new ChatComponentText("\247cThe next elevator is Locked"));
 	}
 	
 	public void teleportonTop(EntityPlayer player)
 	{
+		boolean locked = false;
 		for(int yy = 0; yy < 24; yy++)
 		{
 			if(yy != 0)
@@ -178,12 +199,21 @@ public class TileEntityElevator extends TileEntity
 						{
 							player.setPositionAndUpdate(xCoord, !player.isSneaking() ? yCoord+yy+1 : yCoord-yy+1, zCoord);
 							player.motionY = 0;
+							if(locked)
+							{
+								locked = false;
+								player.addChatMessage(new ChatComponentText("\247cYou have pass a locked elevator"));
+							}
 							break;
+						}else
+						{
+							locked = true;
 						}
 					}
 				}
 			}
 		}
+		if(locked) player.addChatMessage(new ChatComponentText("\247cThe next elevator is Locked"));
 	}
 
 	public void updateEntity()
