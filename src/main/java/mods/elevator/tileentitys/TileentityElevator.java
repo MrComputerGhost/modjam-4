@@ -118,12 +118,12 @@ public class TileEntityElevator extends TileEntity
 				Block b = worldObj.getBlock(xCoord, yCoord, z > 0 ? zCoord+zz : zCoord-zz);
 				if(b != null && b.getUnlocalizedName().equalsIgnoreCase(Blocks.elevator.getUnlocalizedName()))
 				{
-					TileEntityElevator elevator = (TileEntityElevator)worldObj.getTileEntity(x > 0 ? xCoord+xx : xCoord-xx, yCoord, zCoord);
+					TileEntityElevator elevator = (TileEntityElevator)worldObj.getTileEntity(xCoord, yCoord, z > 0 ? zCoord+zz : zCoord-zz);
 					if(elevator != null)
 					{
 						if(elevator.canTeleport(player))
 						{
-							player.setPositionAndUpdate(x > 0 ? xCoord+xx : xCoord-xx, yCoord+1, zCoord);
+							player.setPositionAndUpdate(xCoord, yCoord+1, z > 0 ? zCoord+zz : zCoord-zz);
 						}
 					}
 				}

@@ -13,6 +13,7 @@ public class BlockElevator extends BlockContainer
 	public BlockElevator(Material material)
 	{
 		super(material);
+		setBlockName("block.elevator").setBlockTextureName("elevator:elevator");
 	}
 
 	public TileEntity createNewTileEntity(World world, int arg1)
