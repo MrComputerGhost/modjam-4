@@ -135,6 +135,8 @@ public class TileEntityElevator extends TileEntity
 					{
 						if(elevator.canTeleport(player))
 						{
+							worldObj.playSoundEffect(xCoord, yCoord+1, zCoord, "elevator:elevator", 100, 100);
+							worldObj.playSoundEffect(elevator.xCoord, elevator.yCoord+1, elevator.zCoord, "elevator:elevator", 100, 100);
 							player.setPositionAndUpdate(x > 0 ? xCoord+xx : xCoord-xx, yCoord+1, zCoord);
 							player.swingProgressInt = 0;
 							if(locked)
@@ -163,6 +165,8 @@ public class TileEntityElevator extends TileEntity
 					{
 						if(elevator.canTeleport(player))
 						{
+							worldObj.playSoundEffect(xCoord, yCoord+1, zCoord, "elevator:elevator", 100, 100);
+							worldObj.playSoundEffect(elevator.xCoord, elevator.yCoord+1, elevator.zCoord, "elevator:elevator", 100, 100);
 							player.setPositionAndUpdate(xCoord, yCoord+1, z > 0 ? zCoord+zz : zCoord-zz);
 							player.swingProgressInt = 0;
 							if(locked)
@@ -197,6 +201,8 @@ public class TileEntityElevator extends TileEntity
 					{
 						if(elevator.canTeleport(player))
 						{
+							worldObj.playSoundEffect(xCoord, yCoord+1, zCoord, "elevator:elevator", 100, 100);
+							worldObj.playSoundEffect(elevator.xCoord, elevator.yCoord+1, elevator.zCoord, "elevator:elevator", 100, 100);
 							player.setPositionAndUpdate(xCoord, !player.isSneaking() ? yCoord+yy+1 : yCoord-yy+1, zCoord);
 							player.motionY = 0;
 							if(locked)

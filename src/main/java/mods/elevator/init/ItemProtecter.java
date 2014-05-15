@@ -42,10 +42,14 @@ public class ItemProtecter extends Item
 					}else if(!player.isSneaking() && elevator.list.isEmpty())
 					{
 						player.addChatMessage(new ChatComponentText("This Elevator is Unlocked"));
-					}else if(player.isSneaking() && !elevator.list.isEmpty())
+					}else if(player.isSneaking() && !elevator.list.contains(player.getDisplayName()))
 					{
 						elevator.list.add(player.getDisplayName());
 						player.addChatMessage(new ChatComponentText("You are now on the whitelist"));
+					}else if(player.isSneaking() && elevator.list.contains(player.getDisplayName()))
+					{
+						elevator.list.remove(player.getDisplayName());
+						player.addChatMessage(new ChatComponentText("You are nolonger on the whitelist"));
 					}
 				}
 			}

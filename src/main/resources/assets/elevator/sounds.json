@@ -1,0 +1,8 @@
+{
+	"elevator": {
+		"catagory": "player",
+		"sounds": [
+			"elevator"
+		]
+	}
+}
