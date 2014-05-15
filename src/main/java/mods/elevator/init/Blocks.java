@@ -2,6 +2,7 @@ package mods.elevator.init;
 
 import mods.elevator.blocks.BlockElevator;
 import mods.elevator.blocks.BlockTimer;
+import mods.elevator.blocks.BlockTimerOff;
 import mods.elevator.tileentitys.TileEntityElevator;
 import mods.elevator.tileentitys.TileEntityTimer;
 import net.minecraft.block.Block;
@@ -13,7 +14,7 @@ public class Blocks
 	
 	public static Block elevator = new BlockElevator(Material.iron);
 	public static Block timer = new BlockTimer(Material.wood);
-	public static Block timer_off = new BlockTimer(Material.wood);
+	public static Block timer_off = new BlockTimerOff(Material.wood);
 	
 	public static void init()
 	{
