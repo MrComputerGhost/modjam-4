@@ -1,5 +1,7 @@
 package mods.elevator;
 
+import mods.elevator.init.Blocks;
+import mods.elevator.init.Items;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -15,6 +17,8 @@ public class ElevatorMod
 	@EventHandler
 	public void preinit(FMLPreInitializationEvent event)
 	{
+		Blocks.init();
+		Items.init();
 	}
 	
 	@EventHandler
