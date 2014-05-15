@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "elevator",
+  "name": "Elevator Mod",
+  "description": "A mod a adds 6D elevator",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authors": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authors": ["markhuang1"],
+  "credits": "",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
