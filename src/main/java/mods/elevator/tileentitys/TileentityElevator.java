@@ -26,7 +26,7 @@ public class TileEntityElevator extends TileEntity
 				EntityPlayer player = (EntityPlayer)object;
 				if(player.posX > xCoord-0.35 && player.posX < xCoord+1.35)
 				{
-					if(player.posY > yCoord && player.posY < yCoord+1.35)
+					if(player.posY > yCoord && player.posY < yCoord+1.5)
 					{
 						if(player.posZ > zCoord-0.35 && player.posZ < zCoord+1.35)
 						{
@@ -93,7 +93,7 @@ public class TileEntityElevator extends TileEntity
 	{
 		int x = getDirectiononBlocksX(player);
 		int z = getDirectiononBlocksZ(player);
-		for(int xx = 0; xx < Math.abs(x)*8; xx++)
+		for(int xx = 0; xx < Math.abs(x)*16; xx++)
 		{
 			if(xx != 0)
 			{
@@ -106,12 +106,14 @@ public class TileEntityElevator extends TileEntity
 						if(elevator.canTeleport(player))
 						{
 							player.setPositionAndUpdate(x > 0 ? xCoord+xx : xCoord-xx, yCoord+1, zCoord);
+							player.swingProgressInt = 0;
+							break;
 						}
 					}
 				}
 			}
 		}
-		for(int zz = 0; zz < Math.abs(z)*8; zz++)
+		for(int zz = 0; zz < Math.abs(z)*16; zz++)
 		{
 			if(zz != 0)
 			{
@@ -124,6 +126,31 @@ public class TileEntityElevator extends TileEntity
 						if(elevator.canTeleport(player))
 						{
 							player.setPositionAndUpdate(xCoord, yCoord+1, z > 0 ? zCoord+zz : zCoord-zz);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public void teleportonTop(EntityPlayer player)
+	{
+		for(int yy = 0; yy < 24; yy++)
+		{
+			if(yy != 0)
+			{
+				Block b = worldObj.getBlock(xCoord, !player.isSneaking() ? yCoord+yy : yCoord-yy, zCoord);
+				if(b != null && b.getUnlocalizedName().equalsIgnoreCase(Blocks.elevator.getUnlocalizedName()))
+				{
+					TileEntityElevator elevator = (TileEntityElevator)worldObj.getTileEntity(xCoord, !player.isSneaking() ? yCoord+yy : yCoord-yy, zCoord);
+					if(elevator != null)
+					{
+						if(elevator.canTeleport(player))
+						{
+							player.setPositionAndUpdate(xCoord, !player.isSneaking() ? yCoord+yy+1 : yCoord-yy+1, zCoord);
+							player.motionY = 0;
+							break;
 						}
 					}
 				}
@@ -139,6 +166,9 @@ public class TileEntityElevator extends TileEntity
 			if(player != null && player.swingProgressInt == 1)
 			{
 				teleportonSide(player);
+			}else if(player != null && player.motionY > 0.1)
+			{
+				teleportonTop(player);
 			}
 		}
 	}
