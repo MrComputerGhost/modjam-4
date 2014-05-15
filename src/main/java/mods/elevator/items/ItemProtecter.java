@@ -46,7 +46,7 @@ public class ItemProtecter extends Item
 						player.addChatMessage(new ChatComponentText("Users: "));
 						for(String s : elevator.list)
 						{
-							player.addChatMessage(new ChatComponentText("      "+s));	
+							player.addChatMessage(new ChatComponentText("       "+s));	
 						}
 					}else if(!player.isSneaking() && elevator.list.isEmpty())
 					{

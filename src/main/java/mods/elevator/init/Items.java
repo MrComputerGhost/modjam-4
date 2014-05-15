@@ -8,6 +8,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class Items
 {
 	
+	public static Item redstoneChip = new ItemPart("item.redstoneChip");
 	public static Item ironChip = new ItemPart("item.ironChip");
 	public static Item goldChip = new ItemPart("item.goldChip");
 	public static Item enderChip = new ItemPart("item.enderChip");
@@ -15,6 +16,7 @@ public class Items
 	
 	public static void init()
 	{
+		GameRegistry.registerItem(redstoneChip, "item.redstoneChip");
 		GameRegistry.registerItem(ironChip, "item.ironChip");
 		GameRegistry.registerItem(goldChip, "item.goldChip");
 		GameRegistry.registerItem(enderChip, "item.enderChip");
